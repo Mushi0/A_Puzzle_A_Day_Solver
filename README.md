@@ -4,11 +4,33 @@
 
 - Python version: `3.8`
 
-- For the optimisation model `main_optimisation.py`, I used *IBM CPLEX* solver version `22.11`. It is a commercial solver, but you can get an academic lisence for free [here](https://www.ibm.com/academic/). 
+- For the optimisation model solved with [`CPLEX`](./main_optimisation_CPLEX.py), I used [*IBM CPLEX*](https://www.ibm.com/products/ilog-cplex-optimization-studio) solver version `22.11`. It is a commercial solver, but you can get an academic lisence for free [here](https://www.ibm.com/academic/). 
+
+- For the model solved using [`HiGHS`](main_optimisation_HiGHS.py), I used the Python API of the fastest open source optimisation solver [*HiGHS*](https://highs.dev/). The version of *highspy* is `1.12.0`. 
 
 ## Optimisation Method
 
-`main_optimisation.py` file is the optimisation method for getting one solution for a specific date. While running the programme, input the date in the format DD-MM. The solution will be printed out on the terminal. 
+`main_optimisation_CPLEX.py` and `main_optimisation_HiGHS.py` are the scripts for the optimisation method solved with the two solvers. They take a date as input, and output one solution for the specific date. While running the programme, input the date in the format DD-MM. The solution will be printed out on the terminal. An example is as follow: 
+
+```
+Piece 0 at position 1
+Piece 1 at position 92
+Piece 2 at position 41
+Piece 3 at position 39
+Piece 4 at position 110
+Piece 5 at position 15
+Piece 6 at position 19
+Piece 7 at position 45
+
+=============Solution=============
+6 0 0 0 7 7
+6 0 0 0 7 M
+6 6 D 7 7 4 4
+6 3 3 3 1 1 4
+2 3 3 5 5 1 4
+2 5 5 5 1 1 4
+2 2 2
+```
 
 ## Brute Force Method
 
