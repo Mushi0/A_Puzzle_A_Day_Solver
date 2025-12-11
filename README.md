@@ -34,7 +34,7 @@ Piece 7 at position 45
 
 ## Brute Force Method
 
-`main.py` is the brute force script for getting the solution for every day in a year (including 29th Feb). It reads the file `Pieces.txt` as an input and saves all the feasible solutions in a `result.txt` file at the same directory. An example of the solutions is as follows: 
+`main_brute_force.py` is the brute force script for getting the solution for every day in a year (including 29th Feb). It reads the file `Pieces.txt` as an input and saves all the feasible solutions in a `result.txt` file at the same directory. An example of the solutions is as follows: 
 
 ```
 Solution 0:
