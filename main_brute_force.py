@@ -25,6 +25,22 @@ def create_position(piece, lead_cell):
 
     return int(''.join(board), 2)
 
+def rotate_shape_90(shape):
+    max_y = max([y for (x, y) in shape])
+    new_shape = set()
+    for cell in shape:
+        new_cell = (max_y - cell[1], cell[0])
+        new_shape.add(new_cell)
+    return new_shape
+
+def flip_shape(shape):
+    max_x = max([x for (x, y) in shape])
+    new_shape = set()
+    for cell in shape:
+        new_cell = (max_x - cell[0], cell[1])
+        new_shape.add(new_cell)
+    return new_shape
+
 nb_solution = 0
 
 def main():
@@ -39,30 +55,43 @@ def main():
     pieces_positions = {}
     while len(pieces_data) != 0:
         # read piece shapes
-        this_shape = []
+        this_shape = set()
         piece_nb = int(pieces_data.pop(0)[1:])
         cell = pieces_data.pop(0)
         while cell != '':
             cell = [int(x) for x in cell.split(',')]
             cell = tuple(cell)
-            this_shape.append(cell)
+            this_shape.add(cell)
             cell = pieces_data.pop(0)
+        
+        # get all shape variations (rotations and flips)
+        this_shape_variations = [this_shape]
+        for _ in range(3):
+            this_shape = rotate_shape_90(this_shape)
+            if this_shape not in this_shape_variations:
+                this_shape_variations.append(this_shape)
+        this_shape = flip_shape(this_shape)
+        if this_shape not in this_shape_variations:
+            this_shape_variations.append(this_shape)
+        for _ in range(3):
+            this_shape = rotate_shape_90(this_shape)
+            if this_shape not in this_shape_variations:
+                this_shape_variations.append(this_shape)
         
         # get all the position this piece can take
         all_position_this_piece = []
-        for x in range(7):
-            for y in range(7):
-                if x < 2 and y > 5:
-                    continue
-                if x > 5 and y > 2:
-                    continue
+        for this_shape in this_shape_variations:
+            for x in range(7):
+                for y in range(7):
+                    if x < 2 and y > 5:
+                        continue
+                    if x > 5 and y > 2:
+                        continue
 
-                pos = create_position(this_shape, (x, y))
-                if pos is not None:
-                    all_position_this_piece.append(pos)
-        if piece_nb not in pieces_positions:
-            pieces_positions[piece_nb] = []
-        pieces_positions[piece_nb] += all_position_this_piece
+                    pos = create_position(this_shape, (x, y))
+                    if pos is not None:
+                        all_position_this_piece.append(pos)
+        pieces_positions[piece_nb] = all_position_this_piece
     
     def search(this_piece, this_board, positions):
         global nb_solution

@@ -10,7 +10,7 @@
 
 ## Optimisation Method
 
-`main_optimisation_CPLEX.py` and `main_optimisation_HiGHS.py` are the scripts for the optimisation method solved with the two solvers. They take a date as input, and output one solution for the specific date. While running the programme, input the date in the format DD-MM. The solution will be printed out on the terminal. An example is as follow: 
+`main_optimisation_CPLEX.py` and `main_optimisation_HiGHS.py` are the scripts for the optimisation method solved with the two solvers. They use the file `Pieces.txt` and take a date as input, and output one solution for the specific date. While running the programme, input the date in the format DD-MM. The solution will be printed out on the terminal. An example is as follow: 
 
 ```
 Piece 0 at position 1
