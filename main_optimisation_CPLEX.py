@@ -102,10 +102,11 @@ def main():
         if (j < 12 and j == month - 1) or (j >= 12 and j - 12 == day - 1):
             mdl.add_constraint(mdl.sum(where_pieces[i][k] * int(pieces_positions[i][k][j]) 
                                        for i in pieces_positions 
-                                       for k in range(len(pieces_positions[i]))) <= 0)
-        mdl.add_constraint(mdl.sum(where_pieces[i][k] * int(pieces_positions[i][k][j]) 
-                                   for i in pieces_positions 
-                                   for k in range(len(pieces_positions[i]))) <= 1)
+                                       for k in range(len(pieces_positions[i]))) == 0)
+        else:
+            mdl.add_constraint(mdl.sum(where_pieces[i][k] * int(pieces_positions[i][k][j]) 
+                                       for i in pieces_positions 
+                                       for k in range(len(pieces_positions[i]))) == 1)
     mdl.minimize(0)
     
     # Print the result

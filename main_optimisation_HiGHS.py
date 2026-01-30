@@ -101,11 +101,12 @@ def main():
     for j in range(nb_cells):
         if (j < 12 and j == month - 1) or (j >= 12 and j - 12 == day - 1):
             h.addConstr(h.qsum(where_pieces[i][k] * int(pieces_positions[i][k][j]) 
-                            for i in pieces_positions 
-                            for k in range(len(pieces_positions[i]))) <= 0)
-        h.addConstr(h.qsum(where_pieces[i][k] * int(pieces_positions[i][k][j]) 
-                        for i in pieces_positions 
-                        for k in range(len(pieces_positions[i]))) <= 1)
+                               for i in pieces_positions 
+                               for k in range(len(pieces_positions[i]))) == 0)
+        else:
+            h.addConstr(h.qsum(where_pieces[i][k] * int(pieces_positions[i][k][j]) 
+                               for i in pieces_positions 
+                               for k in range(len(pieces_positions[i]))) == 1)
     h.run()
     
     # Print the result
