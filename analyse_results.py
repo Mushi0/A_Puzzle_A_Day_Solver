@@ -59,15 +59,24 @@ def main():
     plt.savefig(os.path.join('images', 'solutions_per_date.png'))
     plt.close()
 
-    # plot the average value for every month
+    # plot box plot per month
     plt.figure(figsize = (8, 6))
-    df_monthly_avg = df_date_counts.groupby('Month')['Count'].mean().reset_index()
-    plt.bar(df_monthly_avg['Month'].map(month_names), df_monthly_avg['Count'], color = 'darkgreen')
+    sns.boxplot(x = 'Month_Name', y = 'Count', data = df_date_counts, color = 'darkgreen')
     plt.xlabel('Month')
-    plt.ylabel('Average Number of Solutions')
-    plt.title('Average Number of Solutions per Month')
+    plt.ylabel('Number of Solutions')
+    plt.title('Box Plot of Solutions per Month')
     plt.tight_layout()
-    plt.savefig(os.path.join('images', 'average_solutions_per_month.png'))
+    plt.savefig(os.path.join('images', 'box_solutions_per_month.png'))
+    plt.close()
+
+    # plot box plot per day of month
+    plt.figure(figsize = (12, 6))
+    sns.boxplot(x = 'Date', y = 'Count', data = df_date_counts, color = 'darkgreen')
+    plt.xlabel('Day of Month')
+    plt.ylabel('Number of Solutions')
+    plt.title('Box Plot of Solutions per Day of Month')
+    plt.tight_layout()
+    plt.savefig(os.path.join('images', 'box_solutions_per_day-of-month.png'))
     plt.close()
 
     # plot the distribution of solutions per date
