@@ -2,4 +2,6 @@
 result.txt
 *.zip
 *.jpg
+*.png
+*.xlsx
 *test*

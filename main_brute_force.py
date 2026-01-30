@@ -1,6 +1,7 @@
 import sys
 
 nb_cells = 43
+days_in_month = [31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
 
 def create_position(piece, lead_cell):
     '''
@@ -116,6 +117,8 @@ def main():
                         board[i] = 'D'
                         day = i - 11
             if month == 0 or day == 0:
+                return
+            if day > days_in_month[month - 1]:
                 return
             print(f'Solution {nb_solution}:')
             print(f'Date: {day}/{month}')
